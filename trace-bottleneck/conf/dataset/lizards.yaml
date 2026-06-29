@@ -1,0 +1,33 @@
+defaults:
+  - commons
+  - _self_
+
+name: lizards
+loader:
+    _target_: src.data.datasets.bndataset.BNDataset
+    dag_name: lizards
+    task_name: Height
+    dataset_n_samples: 10000
+    val_size: 0.1 # 10% of total dataset
+    test_size: 0.2
+    ftune_size: 0.      # 0.3
+    ftune_val_size: 0.  # 0.1
+    bias:
+        train:
+            mode: false   #False / custom
+            kwargs: {}
+        test:
+            mode: false
+            kwargs: {}
+
+latent_dim: 8
+noise: 0.
+
+is_image_dataset: false
+reduce_fraction: Null
+onehot_to_concepts: false
+
+label_descriptions:
+  Species: "(the species of the lizard) a two-level factor with levels Sagrei and Distichus."
+  Height: "(perch height) a two-level factor with levels high (greater than 4.75 feet) and low (lesser or equal to 4.75 feet)."
+  Diameter: "(perch diameter) a two-level factor with levels narrow (greater than 4 inches) and wide (lesser or equal to 4 inches)."

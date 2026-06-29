@@ -1,0 +1,35 @@
+defaults:
+  - commons
+  - _self_
+
+name: marks
+loader:
+    _target_: src.data.datasets.bndataset.BNDataset
+    dag_name: marks
+    task_name: STAT
+    dataset_n_samples: 10000
+    val_size: 0.1 # 10% of total dataset
+    test_size: 0.2
+    ftune_size: 0.      # 0.3
+    ftune_val_size: 0.  # 0.1
+    bias:
+        train:
+            mode: false   #False / custom
+            kwargs: {}
+        test:
+            mode: false
+            kwargs: {}
+
+latent_dim: 8
+noise: 0.
+
+is_image_dataset: false
+reduce_fraction: Null
+onehot_to_concepts: false
+
+label_descriptions:
+  MECH: "Mechanics: A continuous variable measured on a scale from 0 to 100. This represents the student’s performance in the mechanics portion of their studies, which typically involves topics related to the principles of force, motion, energy, and the behavior of materials under various conditions. It is a key area in engineering and physics."
+  VECT: "Vectors: A continuous variable measured on a scale from 0 to 100. This variable reflects the student’s performance in vector analysis, which is a branch of mathematics and physics concerned with vector quantities and operations. Topics may include vector addition, dot and cross products, and their applications in physics and engineering."
+  ALG: "Algebra: A continuous variable measured on a scale from 0 to 100. This score represents the student’s performance in algebra, which deals with mathematical symbols and the rules for manipulating these symbols. Algebra is fundamental in solving equations and understanding higher-level mathematics and many other fields."
+  ANL: "Analysis: A continuous variable measured on a scale from 0 to 100. This variable represents the student's performance in mathematical analysis, which involves the study of limits, continuity, differentiability, and integrability of functions. It is an essential field of mathematics, forming the foundation for much of higher mathematics."
+  STAT: "Statistics: A continuous variable measured on a scale from 0 to 100. This score reflects the student’s performance in statistics, which includes the collection, analysis, interpretation, and presentation of data. Topics include probability theory, statistical inference, hypothesis testing, and regression analysis."

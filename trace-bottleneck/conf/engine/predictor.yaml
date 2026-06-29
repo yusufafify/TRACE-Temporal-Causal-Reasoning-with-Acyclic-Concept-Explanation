@@ -1,0 +1,37 @@
+defaults:
+  - metrics: default
+  - _self_
+  
+
+_target_: "src.engines.predictor.Predictor"
+model: "${model}"
+optim_class:
+  _target_: "hydra.utils.get_class"
+  path: "torch.optim.AdamW"
+optim_kwargs:
+  lr: 0.001
+  weight_decay: 0.01
+scheduler_class:
+  _target_: "hydra.utils.get_class"
+  path: "torch.optim.lr_scheduler.ReduceLROnPlateau"
+scheduler_kwargs:
+  mode: "max"
+  factor: 0.5
+  patience: 10
+  monitor: "val/y/y_f1_macro"
+# loss_fn:
+#   _target_: "tsl.metrics.torch.MaskedMAE"
+intervention_prob: 0.8
+# Curriculum: start at intervention_prob_start during early training so the
+# encoder gets task gradient through predicted concepts, then ramp linearly
+# to intervention_prob over intervention_anneal_epochs.
+intervention_prob_start: 0.3
+intervention_anneal_epochs: 15
+test_interv_noise: 0.
+propagator_warmup_epochs: 15
+# Intervention-consistency loss (Steinmann et al., Espinosa-Zarlenga et al.):
+# during training, run a second forward pass with all-GT concepts and minimise
+# KL(softmax(y|c_pred) || softmax(y|c_gt).detach()). Pushes the propagator to
+# rely on the concept bottleneck rather than the noisy predicted-concept
+# distribution, which in turn lifts oracle Δacc. Set 0.0 to disable.
+intervention_consistency_weight: 0.5

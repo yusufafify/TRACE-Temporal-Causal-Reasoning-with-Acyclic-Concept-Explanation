@@ -1,0 +1,36 @@
+defaults:
+  - dataset: colormnist
+  - causal_discovery: ges
+  - llm: gpt
+  - rag: Null
+  - model: c2bm
+  - engine: predictor
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: "outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+  sweep:
+    dir: "outputs/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+    subdir: "${hydra.job.num}"
+
+completion:
+  # causal_graph_completion
+  n_tries: 1
+  cycles_allowed: True
+  selection_bias: True
+  external_answers: Null
+
+trainer:
+  # limit_train_batches: 600
+  max_epochs: 200
+  # gradient_clip_val: 1.0
+  # gradient_clip_algorithm: norm
+  monitor: "val_loss"
+  patience: 20
+
+seed: 42
+notes: null
+policy: nodes_true

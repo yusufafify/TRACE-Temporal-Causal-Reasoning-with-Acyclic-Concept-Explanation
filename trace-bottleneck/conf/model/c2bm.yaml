@@ -1,0 +1,57 @@
+_target_: "src.models.c2bm.C2BM"
+hidden_size: 256
+concept_hidden_size: 128
+n_layers_encoder: 2
+n_layers_concept_encoder: 2
+n_layers_propagation: 2
+activation: leaky_relu
+concept_loss_weight: 0.5
+normalize_concept_loss: true
+# focal_f1 = focal loss + soft macro-F1 (class-weighted via y_class_weights).
+# Switched on by default to lift minority-class F1 on LUMIERE; pass
+# model.task_loss_type=cross_entropy to recover the original behaviour.
+task_loss_type: focal_f1
+# Deep-supervision aux head on the PD probability of the 4-class output.
+# Set to 0.0 to disable. 0.3 over-pulled the model toward the binary signal
+# and degraded 4-class F1 in run 2026-05-14/01-01-55; reduced to 0.1.
+aux_binary_weight: 0.1
+# L1 on first-layer weights of every learnable propagator (sparse parent reliance).
+propagator_l1_weight: 1.0e-4
+prop_type: 'mlp'
+cat_latent: false
+# Replace the old C2BM MLP encoder with Youssef's full-3D MedicalNet ResNet-18.
+input_encoder_type: medicalnet
+medicalnet_root: /home/group2/youssef/XAI_Disease_progression_GP/Label-free-CBM/option4-siamese-explicit-delta/MedicalNet
+medicalnet_pretrained_path: /home/group2/youssef/XAI_Disease_progression_GP/Label-free-CBM/option4-siamese-explicit-delta/MedicalNet/pretrain/resnet_18_23dataset.pth
+medicalnet_in_channels: 4
+medicalnet_seg_in_channels: 3
+medicalnet_use_segmentation: true
+medicalnet_clinical_dim: 0
+medicalnet_output_dim: 128
+medicalnet_freeze_backbone: false
+medicalnet_sample_size: 128
+# Concepts fed straight from batch GT scalar (no ConceptBlock, no leakage path).
+# Use for metadata-style inputs the image cannot predict, and for binary
+# flags that are already computed deterministically from seg masks during
+# preprocessing (so the GT is computable at inference whenever masks are).
+scalar_passthrough_nodes:
+  - time_gap
+  - new_lesion_flag
+# Concepts computed by closed-form math from parent predictions
+# (no ConceptBlock, no learned propagator, no concept loss).
+# Closes embedding-leakage on derived nodes by construction. Set to [] to disable.
+deterministic_nodes:
+  - delta_enhancing_absolute
+  - delta_enhancing_percent
+  - delta_non_enhancing_absolute
+  - delta_non_enhancing_percent
+  - delta_spd_absolute
+  - delta_spd_percent
+  - vol_pd_flag
+  - vol_pr_flag
+  - spd_pd_flag
+  - spd_pr_flag
+# concept_means and concept_stds are populated automatically by
+# update_config_from_data from the train-fold dataset's z-score stats.
+concept_means: null
+concept_stds: null

@@ -1,0 +1,19 @@
+defaults:
+  - commons
+  - _self_
+
+name: siim_pneumothorax
+loader:
+    _target_: src.data.datasets.siim_pneumothorax.ImageClassificationDataset
+    test_size: 0.66
+    ftune_size: 0.      
+
+is_image_dataset: true
+reduce_fraction: Null
+onehot_to_concepts: True
+
+generate_concepts: True
+load_embeddings: True
+load_graph: False
+
+label_descriptions: Null

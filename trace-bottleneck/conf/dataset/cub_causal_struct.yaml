@@ -1,0 +1,42 @@
+defaults:
+  - commons
+  - _self_
+
+name: cub_causal_struct
+loader:
+    _target_: src.data.datasets.cub.CUBDataset
+    ftune_size: 0.
+    task_label: 'survival'
+    task_cardinality: 3
+    to_keep: ${dataset.label_descriptions}
+    causal_struct: true
+
+batch_size: 128
+
+is_image_dataset: true
+reduce_fraction: Null       # does not work with CelebA
+onehot_to_concepts: false
+
+load_embeddings: true
+
+backbone: resnet50
+
+label_descriptions:
+  has_tail_pattern::spotted: Tail has a spotted pattern
+  has_tail_pattern::striped: Tail has a striped pattern
+  has_tail_pattern::multi-colored: Tail has a multi-colored pattern
+  has_back_pattern::spotted: Back has a spotted pattern
+  has_back_pattern::striped: Back has a striped pattern
+  has_back_pattern::multi-colored: Back has a multi-colored pattern
+  
+  has_tail_shape::rounded_tail: Tail is rounded in shape
+  has_wing_shape::rounded-wings: Wings are rounded in shape
+  has_size::medium_(9_-_16_in): Bird is medium-sized (9-16 inches)
+
+  has_bill_shape::curved_(up_or_down): Bill is curved either upward or downward
+  has_bill_shape::needle: Bill is thin and needle-like
+  has_bill_shape::spatulate: Bill is broad and flat like a spatula
+  has_bill_shape::all-purpose: Bill is versatile and suited for various tasks
+  has_bill_length::longer_than_head: Bill is longer than the head
+  has_bill_length::shorter_than_head: Bill is shorter than the head
+  has_shape::long-legged-like: Bird has a long-legged shape

@@ -1,0 +1,137 @@
+defaults:
+  - commons
+  - _self_
+
+name: cub
+loader:
+    _target_: src.data.datasets.cub.CUBDataset
+    ftune_size: 0.
+    task_label: 'bird_species'
+    task_cardinality: 200
+    to_keep: ${dataset.label_descriptions}
+    causal_struct: false
+    
+batch_size: 128
+
+is_image_dataset: true
+reduce_fraction: Null       # does not work with CelebA
+onehot_to_concepts: false
+
+load_embeddings: true
+
+backbone: resnet50
+
+label_descriptions:
+  has_bill_shape::curved_(up_or_down): Bill is curved either upward or downward
+  has_bill_shape::needle: Bill is thin and needle-like
+  has_bill_shape::spatulate: Bill is broad and flat like a spatula
+  has_bill_shape::all-purpose: Bill is versatile and suited for various tasks
+  has_wing_color::blue: Wings are blue in color
+  has_wing_color::rufous: Wings are reddish-brown in color
+  has_wing_color::grey: Wings are grey in color
+  has_wing_color::orange: Wings are orange in color
+  has_wing_color::black: Wings are black in color
+  has_wing_color::red: Wings are red in color
+  has_upperparts_color::blue: Upperparts are blue in color
+  has_upperparts_color::rufous: Upperparts are reddish-brown in color
+  has_upperparts_color::grey: Upperparts are grey in color
+  has_upperparts_color::orange: Upperparts are orange in color
+  has_upperparts_color::black: Upperparts are black in color
+  has_upperparts_color::red: Upperparts are red in color
+  has_underparts_color::blue: Underparts are blue in color
+  has_underparts_color::rufous: Underparts are reddish-brown in color
+  has_underparts_color::grey: Underparts are grey in color
+  has_underparts_color::orange: Underparts are orange in color
+  has_underparts_color::black: Underparts are black in color
+  has_underparts_color::red: Underparts are red in color
+  has_underparts_color::buff: Underparts are pale yellowish-brown in color
+  has_breast_pattern::spotted: Breast has a spotted pattern
+  has_breast_pattern::striped: Breast has a striped pattern
+  has_back_color::blue: Back is blue in color
+  has_back_color::rufous: Back is reddish-brown in color
+  has_back_color::grey: Back is grey in color
+  has_back_color::orange: Back is orange in color
+  has_back_color::black: Back is black in color
+  has_back_color::red: Back is red in color
+  has_tail_shape::rounded_tail: Tail is rounded in shape
+  has_upper_tail_color::blue: Upper tail is blue in color
+  has_upper_tail_color::rufous: Upper tail is reddish-brown in color
+  has_upper_tail_color::orange: Upper tail is orange in color
+  has_upper_tail_color::black: Upper tail is black in color
+  has_upper_tail_color::red: Upper tail is red in color
+  has_head_pattern::unique_pattern: Head has a unique pattern
+  has_head_pattern::eyering: Head has an eyering pattern
+  has_breast_color::blue: Breast is blue in color
+  has_breast_color::rufous: Breast is reddish-brown in color
+  has_breast_color::grey: Breast is grey in color
+  has_breast_color::orange: Breast is orange in color
+  has_breast_color::black: Breast is black in color
+  has_breast_color::red: Breast is red in color
+  has_throat_color::rufous: Throat is reddish-brown in color
+  has_throat_color::grey: Throat is grey in color
+  has_throat_color::orange: Throat is orange in color
+  has_throat_color::black: Throat is black in color
+  has_throat_color::red: Throat is red in color
+
+  has_eye_color::orange: Eyes are orange in color
+  has_eye_color::buff: Eyes are pale yellowish-brown in color
+  has_bill_length::longer_than_head: Bill is longer than the head
+  has_bill_length::shorter_than_head: Bill is shorter than the head
+  has_forehead_color::blue: Forehead is blue in color
+  has_forehead_color::rufous: Forehead is reddish-brown in color
+  has_forehead_color::grey: Forehead is grey in color
+  has_forehead_color::orange: Forehead is orange in color
+  has_forehead_color::black: Forehead is black in color
+  has_under_tail_color::blue: Under tail is blue in color
+  has_under_tail_color::rufous: Under tail is reddish-brown in color
+  has_under_tail_color::orange: Under tail is orange in color
+  has_under_tail_color::black: Under tail is black in color
+  has_under_tail_color::red: Under tail is red in color
+  has_nape_color::blue: Nape is blue in color
+  has_nape_color::rufous: Nape is reddish-brown in color
+  has_nape_color::grey: Nape is grey in color
+  has_nape_color::orange: Nape is orange in color
+  has_nape_color::black: Nape is black in color
+  has_nape_color::red: Nape is red in color
+  has_belly_color::blue: Belly is blue in color
+  has_belly_color::rufous: Belly is reddish-brown in color
+  has_belly_color::grey: Belly is grey in color
+  has_belly_color::orange: Belly is orange in color
+  has_belly_color::black: Belly is black in color
+  has_belly_color::red: Belly is red in color
+  has_belly_color::buff: Belly is pale yellowish-brown in color
+  has_wing_shape::rounded-wings: Wings are rounded in shape
+  has_size::large_(16_-_32_in): Bird is large, measuring 16 to 32 inches
+  has_size::very_large_(32_-_72_in): Bird is very large, measuring 32 to 72 inches
+  has_size::medium_(9_-_16_in): Bird is medium-sized, measuring 9 to 16 inches
+  has_shape::long-legged-like: Bird has a long-legged shape
+  has_shape::swallow-like: Bird has a swallow-like shape
+  has_shape::perching-like: Bird has a perching-like shape
+  has_back_pattern::spotted: Back has a spotted pattern
+  has_back_pattern::striped: Back has a striped pattern
+  has_back_pattern::multi-colored: Back has a multi-colored pattern
+  has_tail_pattern::spotted: Tail has a spotted pattern
+  has_tail_pattern::striped: Tail has a striped pattern
+  has_tail_pattern::multi-colored: Tail has a multi-colored pattern
+  has_primary_color::blue: Primary color is blue
+  has_primary_color::rufous: Primary color is reddish-brown
+  has_primary_color::grey: Primary color is grey
+  has_primary_color::orange: Primary color is orange
+  has_primary_color::black: Primary color is black
+  has_primary_color::red: Primary color is red
+  has_leg_color::rufous: Legs are reddish-brown in color
+  has_leg_color::orange: Legs are orange in color
+  has_leg_color::red: Legs are red in color
+  has_bill_color::rufous: Bill is reddish-brown in color
+  has_bill_color::orange: Bill is orange in color
+  has_bill_color::red: Bill is red in color
+  has_bill_color::buff: Bill is pale yellowish-brown in color
+  has_crown_color::blue: Crown is blue in color
+  has_crown_color::rufous: Crown is reddish-brown in color
+  has_crown_color::grey: Crown is grey in color
+  has_crown_color::orange: Crown is orange in color
+  has_crown_color::black: Crown is black in color
+  has_crown_color::buff: Crown is pale yellowish-brown in color
+  has_wing_pattern::solid: Wings have a solid pattern
+  has_wing_pattern::spotted: Wings have a spotted pattern
+  has_wing_pattern::striped: Wings have a striped pattern

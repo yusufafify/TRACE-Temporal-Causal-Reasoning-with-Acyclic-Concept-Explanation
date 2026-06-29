@@ -1,0 +1,22 @@
+
+_target_: "src.models.scbm.SCBM"
+hidden_size: 64
+decoder_hidden_size: 256 # not used by linear
+n_layers_encoder: 1
+n_layers_decoder: 1 # not used by linear
+decoder_type: linear
+activation: leaky_relu
+cov_type: global
+num_monte_carlo: 100
+training_mode: joint
+straight_through: true
+concept_learning: hard
+max_epochs: ${trainer.max_epochs}
+
+# loss parameters
+alpha: 1
+reg_precision: l1
+reg_weight: 1
+
+# intervention parameters
+interv_level: 0.99

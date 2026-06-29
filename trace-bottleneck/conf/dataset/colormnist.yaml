@@ -1,0 +1,32 @@
+defaults:
+  - commons
+  - _self_
+
+name: colormnist
+loader:
+    _target_: src.data.datasets.colormnist.ColorMNISTDataset
+    val_size: 0.1
+    ftune_size: 0.      # 0.3
+    ftune_val_size: 0.  # 0.1
+    coloring:
+        train:
+            mode: random    #False / random / custom
+            kwargs:
+                random_prob: 0.5
+        test:
+            mode: random
+            kwargs: 
+                random_prob: 0.5
+
+batch_size: 512
+
+is_image_dataset: true
+reduce_fraction: Null
+onehot_to_concepts: true
+
+load_embeddings: true
+
+label_descriptions:
+    number: "a variable representing a number from 0 to 9."
+    parity: "a categorical variable that classifies each number based on its parity. It takes one of two values, 'even' (1) or 'odd' (0), where 'even' refers to numbers divisible by 2."
+    color: "a binary variable indicating a color, taking one of two possible values: 'red' (1) or 'green' (0)."

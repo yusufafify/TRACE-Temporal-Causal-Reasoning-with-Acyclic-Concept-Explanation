@@ -1,0 +1,49 @@
+defaults:
+  - commons
+  - _self_
+
+name: asia_reduced
+loader:
+    _target_: src.data.datasets.bndataset.BNDataset
+    dag_name: asia
+    task_name: dysp
+    dataset_n_samples: 10000
+    val_size: 0.1 # 10% of total dataset
+    test_size: 0.2
+    ftune_size: 0.      # 0.3
+    ftune_val_size: 0.  # 0.1
+    bias:
+        train:
+            mode: false   #False / custom
+            kwargs: {}
+            #kwargs:    
+            #    add_arc: [["asia", "lung"]]
+            #    add_arc_prob: [[[1., 1., 1., 0.], [0., 0., 0., 1.]]]
+                # I must provide the new CPD to add, considering the new arc and the old parents.
+                # The new CPD must be a list of lists, where each list is a row of the CPD.
+        test:
+            mode: false
+            kwargs: {}
+    to_keep: [bronc, smoke, dysp]
+
+autoencoder:
+  noise: 0.
+  latent_dim: 32
+  lr: 0.0005
+  epochs: 2000
+  batch_size: 512
+  patience: 50
+
+is_image_dataset: false
+reduce_fraction: Null
+onehot_to_concepts: false
+
+label_descriptions:
+    asia: "a variable indicating whether a patient has recently been in Asia."
+    smoke: "a variable indicating whether a patient is a smoker."
+    lung: "a variable indicating whether a patient has lung cancer."
+    tub: "a variable indicating whether a patient has tuberculosis."
+    bronc: "a variable indicating whether a patient has bronchitis."
+    either: "a variable indicating whether a patient has either tuberculosis or lung cancer."
+    xray: "a variable indicating whether a patient's chest X-ray shows abnormalities."
+    dysp: "a variable indicating whether a patient has difficulty breathing (dyspnea)."

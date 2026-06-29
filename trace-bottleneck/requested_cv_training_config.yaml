@@ -1,0 +1,71 @@
+training:
+  # Data splitting - K-Fold Cross Validation
+  k_folds: 5
+  stratified: true
+  patient_level_split: true
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+
+  # Training loop
+  epochs: 100
+  batch_size: 16
+  learning_rate: 0.001
+  weight_decay: 0.01
+
+  # Optimizer
+  optimizer: AdamW
+  scheduler: ReduceLROnPlateau
+  scheduler_patience: 10
+  scheduler_factor: 0.5
+
+  # Early stopping
+  early_stopping_patience: 20
+  early_stopping_metric: val_f1
+
+  # Loss function
+  loss_function: CrossEntropyLoss
+  class_weights: balanced
+
+hydra_repo_mapping:
+  trainer:
+    max_epochs: 100
+    patience: 20
+    monitor: val/y/y_f1_macro
+    mode: max
+    min_delta: 0.001
+
+  engine:
+    optim_class:
+      path: torch.optim.AdamW
+    optim_kwargs:
+      lr: 0.001
+      weight_decay: 0.01
+    scheduler_class:
+      path: torch.optim.lr_scheduler.ReduceLROnPlateau
+    scheduler_kwargs:
+      mode: max
+      factor: 0.5
+      patience: 10
+      monitor: val/y/y_f1_macro
+
+  model:
+    task_loss_type: cross_entropy
+
+  dataset:
+    loader:
+      batch_size: 16
+      task_cardinality: 4
+      cv_fold: null
+      cv_n_splits: 5
+      cv_val_fold: null
+    cross_validation:
+      enabled: true
+      n_splits: 5
+
+commands:
+  four_class_cv: >-
+    python main.py dataset=lumiere notes=4class_cv
+  binary_cv: >-
+    python main.py dataset=lumiere dataset.loader.task_cardinality=2 notes=binary_cv

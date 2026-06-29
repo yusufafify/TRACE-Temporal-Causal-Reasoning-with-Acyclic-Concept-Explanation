@@ -1,0 +1,7 @@
+query_strategy: expansion
+embedder: multi-qa-mpnet-base-dot-v1 
+chunking_strategy: sliding_window
+source: custom
+n_documents_per_source: 10
+context_length: 5
+verbose: true

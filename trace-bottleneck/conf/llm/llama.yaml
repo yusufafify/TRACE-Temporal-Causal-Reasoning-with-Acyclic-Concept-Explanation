@@ -1,0 +1,15 @@
+name: llama
+version: 3.2
+llm_name: meta-llama/Llama-3.2-3B-Instruct
+
+llm_model_kwargs:
+  device_map: auto
+  torch_dtype: float16
+  temperature: 0.3
+  repetition_penalty: 1.1
+  # max_new_tokens: 512
+
+load_in_fourbit: False
+fourbit_kwargs:
+  double_quant: True
+  quant_type: nf4

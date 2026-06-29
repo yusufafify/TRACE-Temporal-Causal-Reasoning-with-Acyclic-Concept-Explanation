@@ -1,0 +1,21 @@
+defaults:
+  - commons
+  - _self_
+
+name: synthetic
+loader:
+    _target_: src.data.datasets.synthetic.get_synthetic_datasets
+    num_vars: 1500
+    num_points: 50000
+    num_predicates: 100
+    train_ratio: 0.6
+    val_ratio: 0.2
+    ftune_size: 0.
+    seed: 42
+    type: correlated_c
+
+is_image_dataset: false
+reduce_fraction: Null
+onehot_to_concepts: false
+
+label_descriptions: Null

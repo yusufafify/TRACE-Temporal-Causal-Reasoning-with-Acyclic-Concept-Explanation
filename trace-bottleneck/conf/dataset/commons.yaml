@@ -1,0 +1,11 @@
+batch_size: 64
+
+autoencoder:
+  noise: 0.5
+  latent_dim: 16
+  lr: 0.0005
+  epochs: 1000
+  batch_size: 512
+  patience: 50
+
+backbone: resnet18

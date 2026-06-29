@@ -1,0 +1,74 @@
+
+# hidden size, learning rate, (model specific hparams)
+
+asia:
+  - blackbox: 32, 0.00075       (dropout=0.5)        
+  - blackbox_multi: 32, 0.00075                         
+  - cbm_linear: 64, 0.00075        (c_weight=0.8)       
+  - cbm_mlp: 64, 0.00075     (c_weight=0.8)             
+  - cem: 32, 0.00075,   (e=4, dropout=0.5, c_weight=0.8)
+  - scbm: 32, 0.00075                                   
+  - c2bm: 64, 0.0004      (e=4, c_weight=0.8)           
+
+sachs:
+  - blackbox: 64, 0.0004 (dropout=0.5)                   
+  - blackbox_multi: 16, 0.0004                           
+  - cbm_linear: 64, 0.00075    (c_weight=0.8)            
+  - cbm_mlp: 32, 0.0004     (c_weight=0.8)                
+  - cem: 32, 0.0004      (e=4, dropout=0.5, c_weight=0.8)
+  - scbm: 32, 0.00075                                    
+  - c2bm: 32, 0.00075   (e=8, c_weight=0.8)              
+
+insurance:
+  - blackbox: 64, 0.00075   (dropout=0.5)          
+  - blackbox_multi: 32, 000075                     
+  - cbm_linear: 32, 000075     (c_weight=0.8)       
+  - cbm_mlp: 32, 000075     (c_weight=0.8)            
+  - cem: 32, 0.00075 (e=4, dropout=0.5, c_weight=0.8)     
+  - scbm: 64, 0.0004                                   
+  - c2bm: 32, 0.0004   (e=8, c_weight=0.8)      
+
+alarm:
+  - blackbox: 32, 0.0004    (dropout=0.5)               
+  - blackbox_multi: 128, 0.0004  (dropout=0.5)        
+  - cbm_linear: 32, 0.00075      (c_weight=0.8)        
+  - cbm_mlp: 32, 0.00075         (c_weight=0.8)        
+  - cem:  64, 0.0004 (e=4, dropout=0.5, c_weight=0.8)  
+  - scbm: 64, 0.0004                                    
+  - c2bm: 32, 0.0004   (e=8, c_weight=0.8)              
+
+hailfinder:
+  - blackbox: 64, 0.00075  (dropout=0.5)            
+  - blackbox_multi: 256, 0.0004 (dropout=0.5)       
+  - cbm_linear: 64, 0.00075   (c_weight=0.8)        
+  - cbm_mlp: 64, 0.00075    (c_weight=0.8)          
+  - cem: 64, 0.0004 (e=4, dropout=0.5, c_weight=0.8)
+  - scbm: 64, 0.0004    
+  - c2bm:  32, 0.0004   (e=4, c_weight=0.8)       
+
+celeba:
+  - blackbox: 64, 0.000075   (dropout=0.5)    
+  - blackbox_multi: 64 0.00075      
+  - cbm_linear: 64, 0.00075    (c_weight=0.8)         
+  - cbm_mlp: 64, 0.00075     (c_weight=0.8)          
+  - cem: 64, 0.00075 (e=4, dropout=0.5, c_weight=0.8)   
+  - scbm: 64, 0.00075                     
+  - c2bm: 64, 0.00075  (e=8, c_weight=0.8)      
+
+cub_causal_struct:
+  - blackbox: 64, 0.000075   (dropout=0.5)    
+  - blackbox_multi: 64 0.00075       
+  - cbm_linear: 64, 0.00075    (c_weight=0.8)        
+  - cbm_mlp: 64, 0.00075     (c_weight=0.8)            
+  - cem: 64, 0.00075 (e=4, dropout=0.5, c_weight=0.8)   
+  - scbm: 64, 0.00075                      
+  - c2bm: 64, 0.00075  (e=8, c_weight=0.8)       
+
+siim_pneumothorax:
+  - blackbox: 64, 0.000075   (dropout=0.5)  
+  - blackbox_multi: 128, 0.0004 (dropout=0.5)      
+  - cbm_linear: 64, 0.00075    (c_weight=0.8)        
+  - cbm_mlp: 64, 0.00075     (c_weight=0.8)           
+  - cem: 64, 0.00075 (e=4, dropout=0.5, c_weight=0.8)  
+  - scbm: 64, 0.00075                     
+  - c2bm: 64, 0.00075  (e=8, c_weight=0.8)    

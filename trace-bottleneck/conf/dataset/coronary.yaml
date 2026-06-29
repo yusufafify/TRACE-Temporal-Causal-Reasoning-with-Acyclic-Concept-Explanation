@@ -1,0 +1,36 @@
+defaults:
+  - commons
+  - _self_
+
+name: coronary
+loader:
+    _target_: src.data.datasets.bndataset.BNDataset
+    dag_name: coronary
+    task_name: Pressure
+    dataset_n_samples: 10000
+    val_size: 0.1 # 10% of total dataset
+    test_size: 0.2
+    ftune_size: 0.      # 0.3
+    ftune_val_size: 0.  # 0.1
+    bias:
+        train:
+            mode: false   #False / custom
+            kwargs: {}
+        test:
+            mode: false
+            kwargs: {}
+
+latent_dim: 8
+noise: 0.
+
+is_image_dataset: false
+reduce_fraction: Null
+onehot_to_concepts: false
+
+label_descriptions:
+  Smoking: "Smoking: A two-level factor with levels 'no' and 'yes'. This variable indicates whether the individual is a smoker, which is a key risk factor in the development of coronary heart disease (CHD). Smoking is associated with a higher risk of cardiovascular diseases due to its adverse effects on blood vessels, heart function, and lipid metabolism."
+  M. Work: "Strenuous Mental Work: A two-level factor with levels 'no' and 'yes'. This variable captures whether the individual engages in mentally strenuous activities, such as high-pressure work environments, decision-making tasks, or stress-related jobs. Mental stress has been linked to increased risk of heart disease due to its effects on blood pressure and hormonal balance."
+  P. Work: "Strenuous Physical Work: A two-level factor with levels 'no' and 'yes'. This variable indicates whether the individual participates in physically strenuous work, such as heavy lifting or intense manual labor. Physical stress and physical activity are associated with cardiovascular health, and excessive physical strain may increase the risk of heart disease."
+  Pressure: "Systolic Blood Pressure: A two-level factor with levels '<140' and '>140'. This variable represents the individual's systolic blood pressure, a key indicator of cardiovascular health. A systolic blood pressure greater than 140 mmHg is considered elevated and may indicate hypertension, which is a major risk factor for coronary heart disease and other cardiovascular conditions."
+  Proteins: "Ratio of Beta and Alpha Lipoproteins: A two-level factor with levels '<3' and '>3'. This variable represents the ratio of beta-lipoproteins (LDL) to alpha-lipoproteins (HDL) in the blood. An elevated LDL/HDL ratio is often associated with an increased risk of coronary artery disease, as it reflects an imbalance in the lipid profile that can contribute to plaque formation in the arteries."
+  Family: "Family Anamnesis of Coronary Heart Disease: A two-level factor with levels 'neg' and 'pos'. This variable indicates whether the individual has a family history of coronary heart disease, which is a known risk factor for developing the condition. A positive family anamnesis suggests a genetic predisposition to coronary heart disease, although lifestyle factors also play a critical role."

@@ -1,0 +1,64 @@
+defaults:
+  - commons
+  - _self_
+
+name: celeba_unfair
+loader:
+    _target_: src.data.datasets.celeba_unfair.CelebAUnfairDataset
+    ftune_size: 0.
+    task_label: 'Should_be_Hired'
+    task_cardinality: 2
+    to_keep: ${dataset.label_descriptions}
+
+batch_size: 1024
+
+is_image_dataset: true
+reduce_fraction: Null       # does not work with CelebA
+onehot_to_concepts: false
+
+load_embeddings: true
+
+label_descriptions:
+  # 5_o_Clock_Shadow:
+  # Arched_Eyebrows:
+  Attractive: "a binary variable indicating if the person is attractive or not."
+  # Bags_Under_Eyes:
+  # Bald:
+  # Bangs:
+  # Big_Lips:
+  # Big_Nose:
+  # Black_Hair:
+  # Blond_Hair:
+  # Blurry:
+  # Brown_Hair:
+  # Bushy_Eyebrows:
+  # Chubby:
+  # Double_Chin:
+  # Eyeglasses:
+  # Goatee:
+  # Gray_Hair:
+  Heavy_Makeup: "a binary variable indicating if the person is wearing heavy makeup."
+  High_Cheekbones: "a binary variable indicating if the person has high cheekbones."
+  Male: "a binary variable indicating if the person is male or not"
+  Mouth_Slightly_Open: "a binary variable indicating if the person has the mouth slightly open."
+  # Mustache:
+  # Narrow_Eyes:
+  # No_Beard:
+  Oval_Face: "a binary variable indicating if the person has an oval face."
+  # Pale_Skin:
+  Pointy_Nose: "a binary variable indicating if the person has a pointy nose."
+  # Receding_Hairline:
+  # Rosy_Cheeks:
+  # Sideburns:
+  Smiling: "a binary variable indicating if the person is smiling or not."
+  # Straight_Hair:
+  Wavy_Hair: "a binary variable indicating if the person has wavy hair."
+  # Wearing_Earrings:
+  # Wearing_Hat:
+  Wearing_Lipstick: "a binary variable indicating if the person is wearing lipstick."
+  # Wearing_Necklace:
+  # Wearing_Necktie:
+  Young: "a binary variable indicating if the person is young or not."
+  # ---- custom -----
+  Qualified: "a binary variable indicating if the person is qualified for the job or not."
+  Should_be_Hired: "a binary variable indicating if the person should be hired or not."

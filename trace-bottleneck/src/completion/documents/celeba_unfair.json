@@ -1,0 +1,19 @@
+{
+    "documents": [
+        {
+            "content": "The CelebA dataset was developed as a large-scale collection of celebrity images designed for tasks in computer vision and machine learning. The dataset includes over 200,000 images of celebrities, with annotations providing information on attributes such as facial landmarks, pose, and the presence of various features like eyeglasses or facial expressions. The images were curated from publicly available sources to ensure diversity and breadth."
+        },
+        {
+            "content": "To create the CelebA dataset, researchers gathered a substantial number of celebrity images from online platforms. These images were meticulously labeled with 40 binary attributes that describe various facial features, such as whether the individual has a beard, is smiling, or wears glasses. Additionally, five sets of facial landmarks were annotated to facilitate precise analyses of facial geometry."
+        },
+        {
+            "content": "The construction of the CelebA dataset involved collecting a wide variety of celebrity images from publicly accessible websites. This process ensured that the dataset covered a diverse range of ethnicities, ages, and genders. Each image in the dataset was annotated with multiple labels, including 40 attribute categories, to enable its use in machine learning tasks like face recognition and attribute detection."
+        },
+        {
+            "content": "Researchers compiled the CelebA dataset by aggregating images of celebrities from open online sources. A key part of the process was the detailed annotation of these images, which included facial landmarks and attributes describing distinct characteristics of the individuals. The resulting dataset became a valuable resource for developing and evaluating algorithms for facial attribute recognition and image editing."
+        },
+        {
+            "content": "The process of labeling 'attractiveness' in the CelebA dataset was guided by subjective human judgment. Annotators assessed each image based on culturally and socially influenced standards of attractiveness, aiming to reflect general perceptions rather than personal biases. To ensure consistency, multiple annotators reviewed the images, and a consensus approach was used to finalize the labels. However, it is important to note that attractiveness is inherently subjective and context-dependent, which can introduce variability in the labels."
+        }
+    ]
+}

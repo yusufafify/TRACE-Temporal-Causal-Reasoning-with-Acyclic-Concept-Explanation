@@ -1,0 +1,32 @@
+defaults:
+  - commons
+  - _self_
+  
+name: dsprites
+loader:
+    _target_: src.data.datasets.dsprites.DSpriteDataset
+    path_to_rawdata: "dsprites/dsprites_ndarray_co1sh3sc6or40x32y32_64x64.npz"
+    val_size: 0.1
+    test_size: 0.2
+    ftune_size: 0.
+    ftune_val_size: 0.  # 0.1
+    coloring:
+        train:
+            mode: custom    #False / random / custom
+            kwargs:    
+                scale: 
+                    mode: "interval" 
+                    values: [0.5, 0.8]
+                shape: 
+                    mode: "single values"
+                    values: [0, 1]
+        test:
+            mode: random
+            kwargs: 
+                random_prob: 0.5
+                
+    reduce_fraction: 0.2
+
+
+is_image_dataset: true
+onehot_to_concepts: False

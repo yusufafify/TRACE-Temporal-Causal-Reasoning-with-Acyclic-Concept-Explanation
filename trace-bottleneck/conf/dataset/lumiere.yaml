@@ -1,0 +1,113 @@
+defaults:
+  - commons
+  - _self_
+
+name: lumiere
+loader:
+    _target_: src.data.datasets.lumiere.LumiereDataset
+    ftune_size: 0.
+    task_label: 'TreatmentResponse'
+    task_cardinality: 4
+    root_dir: '/home/group2/dataset/Lumiere/'
+    img_dir: '/home/group2/dataset/processed_images/'
+    use_delta_only: false
+    use_8_channels: true
+    # input_mode: 'radiomic' | 'seg' | 'mri' | 'seg_guided' | 'medicalnet'
+    #   radiomic   – bypass images, feed z-scored radiomic features directly
+    #   seg        – 3-ch segmentation maps through SegDifferenceEncoder
+    #   mri        – 20-ch MRI through TemporalDifferenceEncoder (default)
+    #   seg_guided – Seg-Guided Dual-Stream: MRI + seg → pretrained encoder → 768-dim
+    #   medicalnet – full 3D MRI volumes → integrated MedicalNet encoder inside C2BM
+    #                (no 2D slicing, no standalone embedding/pretraining stage)
+    input_mode: medicalnet
+    # Path to precomputed 3D concepts JSON (null = compute from NIfTI segmentations)
+    concepts_3d_path: /home/group2/c2bm_bulktrial/XAI_Disease_progression_GP/causally-reliable-cbm-main/concepts_3d.json
+    case_cache_dir: /home/group2/youssef/XAI_Disease_progression_GP/Label-free-CBM/option4-siamese-explicit-delta/cached_data_MNI
+    full_volume_shape: [128, 128, 128]
+    # expert = corrected RANO-inspired concept DAG; bipartite = all concepts point directly to TreatmentResponse
+    graph_type: expert
+    cv_fold: null
+    cv_n_splits: 5
+    cv_val_fold: null
+
+cross_validation:
+    enabled: true
+    n_splits: 5
+
+# ── Seg-Guided Dual-Stream Encoder settings (only used when input_mode=seg_guided) ──
+seg_guided_embed_dim: 256           # projection dim per stream (output = 3 × embed_dim = 768)
+seg_guided_pretrain_epochs: 100      # seg-supervised concept pretraining epochs (with early stopping)
+seg_guided_pretrain_lr: 0.0001      # pretraining learning rate
+
+batch_size: 32
+num_workers: 4
+
+is_image_dataset: true
+reduce_fraction: Null
+onehot_to_concepts: false
+
+load_embeddings: false
+load_true_graph: true
+load_graph: false
+
+policy:
+  - enhancing_tumor_volume_cm3
+  - non_enhancing_volume_cm3
+  - followup_enhancing_volume_cm3
+  - followup_non_enhancing_volume_cm3
+  - baseline_spd_cm2
+  - followup_spd_cm2
+  - time_gap
+  - delta_enhancing_absolute
+  - delta_enhancing_percent
+  - delta_non_enhancing_absolute
+  - delta_non_enhancing_percent
+  - delta_spd_absolute
+  - delta_spd_percent
+  - new_lesion_flag
+  - vol_pd_flag
+  - vol_pr_flag
+  - spd_pd_flag
+  - spd_pr_flag
+
+backbone: resnet18
+
+label_descriptions:
+  enhancing_tumor_volume_cm3: "Baseline Enhancing Tumor Volume (log1p cm³)"
+  non_enhancing_volume_cm3: "Baseline Non-Enhancing Volume (log1p cm³)"
+  followup_enhancing_volume_cm3: "Follow-up Enhancing Tumor Volume (log1p cm³)"
+  followup_non_enhancing_volume_cm3: "Follow-up Non-Enhancing Volume (log1p cm³)"
+  baseline_spd_cm2: "Baseline SPD (log1p cm²)"
+  followup_spd_cm2: "Follow-up SPD (log1p cm²)"
+  time_gap: "Time Gap From Baseline (years; weeks/52)"
+  delta_enhancing_absolute: "Enhancing Volume Absolute Change (cm³)"
+  delta_enhancing_percent: "Enhancing Volume Relative Change"
+  delta_non_enhancing_absolute: "Non-Enhancing Volume Absolute Change (cm³)"
+  delta_non_enhancing_percent: "Non-Enhancing Volume Relative Change"
+  delta_spd_absolute: "SPD Absolute Change (cm²)"
+  delta_spd_percent: "SPD Relative Change"
+  new_lesion_flag: "New Lesion Detected"
+  vol_pd_flag: "RANO 2.0 Volumetric PD Flag"
+  vol_pr_flag: "RANO 2.0 Volumetric PR Flag"
+  spd_pd_flag: "RANO 2.0 SPD PD Flag"
+  spd_pr_flag: "RANO 2.0 SPD PR Flag"
+
+concept_weights:
+  - [1.0, 1.0, 1.0]  # enhancing_tumor_volume_cm3 (continuous)
+  - [1.0, 1.0, 1.0]  # non_enhancing_volume_cm3 (continuous)
+  - [1.0, 1.0, 1.0]  # followup_enhancing_volume_cm3 (continuous)
+  - [1.0, 1.0, 1.0]  # followup_non_enhancing_volume_cm3 (continuous)
+  - [1.0, 1.0, 1.0]  # baseline_spd_cm2 (continuous)
+  - [1.0, 1.0, 1.0]  # followup_spd_cm2 (continuous)
+  - [1.0, 1.0, 1.0]  # time_gap (continuous)
+  - [1.0, 1.0, 1.0]  # delta_enhancing_absolute (continuous)
+  - [1.0, 1.0, 1.0]  # delta_enhancing_percent (continuous)
+  - [1.0, 1.0, 1.0]  # delta_non_enhancing_absolute (continuous)
+  - [1.0, 1.0, 1.0]  # delta_non_enhancing_percent (continuous)
+  - [1.0, 1.0, 1.0]  # delta_spd_absolute (continuous)
+  - [1.0, 1.0, 1.0]  # delta_spd_percent (continuous)
+  - [1.0, 1.0, 0.0]  # new_lesion_flag (binary)
+  - [1.0, 1.0, 0.0]  # vol_pd_flag (binary)
+  - [1.0, 1.0, 0.0]  # vol_pr_flag (binary)
+  - [1.0, 1.0, 0.0]  # spd_pd_flag (binary)
+  - [1.0, 1.0, 0.0]  # spd_pr_flag (binary)

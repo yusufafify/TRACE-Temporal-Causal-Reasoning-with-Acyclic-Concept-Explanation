@@ -1,0 +1,16 @@
+{
+    "documents": [
+        {
+            "content": "In order to determine whether a given number is even or odd, one must solely focus on the numerical value itself. This means that the intrinsic properties of the number, such as its magnitude and its position within the number line, are the only factors that need to be taken into account. There is no need to consider any external attributes or characteristics that might be associated with the number, as they do not influence its parity."
+        },
+        {
+            "content": "When attempting to ascertain the parity of a number, which is to say, whether it is even or odd, the color attributed to the number is entirely irrelevant. The color, being an external and superficial characteristic, has no bearing on the numerical properties of the number. Therefore, one should disregard the color and focus exclusively on the numerical value to determine its evenness or oddness."
+        },
+        {
+            "content": "To determine if a number is even or odd, you only need to consider the number itself. The numerical value is the sole determinant of its parity. External factors, such as the number's color, shape, or any other attribute, do not affect whether the number is even or odd."
+        },
+        {
+            "content": "The color of a number does not play any role in determining its parity. Whether a number is painted red, blue, or any other color, it does not change the fact that the number's evenness or oddness is based purely on its numerical value. Therefore, ignore the color and focus on the number itself to determine if it is even or odd."
+        }
+    ]
+}

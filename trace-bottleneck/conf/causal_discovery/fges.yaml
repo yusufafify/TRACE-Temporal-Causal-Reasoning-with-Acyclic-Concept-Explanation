@@ -1,0 +1,7 @@
+name: fges
+type: score-based
+causal_discovery_library: pytetrad
+output: CPDAG
+
+kwargs:
+  score_func: local_score_BDeu
